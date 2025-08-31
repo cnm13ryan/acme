@@ -23,8 +23,8 @@ from acme import wrappers
 from acme.multiagent import types as ma_types
 from acme.wrappers import multiagent_dict_key_wrapper
 import dm_env
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 import jax
 import numpy as np
 import tree

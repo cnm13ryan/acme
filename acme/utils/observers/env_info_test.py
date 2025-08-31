@@ -16,8 +16,8 @@
 
 from acme.utils.observers import env_info
 from acme.wrappers import gym_wrapper
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 import numpy as np
 
 from absl.testing import absltest

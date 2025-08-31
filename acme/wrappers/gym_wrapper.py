@@ -20,8 +20,8 @@ from acme import specs
 from acme import types
 
 import dm_env
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 import numpy as np
 import tree
 

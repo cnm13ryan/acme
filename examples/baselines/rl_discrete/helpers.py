@@ -26,7 +26,7 @@ from acme.jax import networks as networks_lib
 from acme.jax import utils
 import atari_py  # pylint:disable=unused-import
 import dm_env
-import gym
+import gymnasium as gym
 import haiku as hk
 import jax.numpy as jnp
 

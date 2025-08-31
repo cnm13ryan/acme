@@ -18,7 +18,7 @@ from typing import Tuple
 from acme import wrappers
 
 import dm_env
-import gym
+import gymnasium as gym
 import numpy as np
 import tensorflow as tf
 

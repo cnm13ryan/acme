@@ -16,7 +16,7 @@
 
 from acme import wrappers
 import dm_env
-import gym
+import gymnasium as gym
 
 
 _VALID_TASK_SUITES = ('gym', 'control')
