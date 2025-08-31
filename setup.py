@@ -37,11 +37,11 @@ spec.loader.exec_module(_metadata)
 # sure this constraint is upheld.
 
 tensorflow = [
-    'tensorflow==2.8.0',
-    'tensorflow_probability==0.15.0',
-    'tensorflow_datasets==4.6.0',
-    'dm-reverb==0.7.2',
-    'dm-launchpad==0.5.2',
+    'tensorflow==2.20.0',
+    'tensorflow_probability>=0.25.0',
+    'tensorflow_datasets>=4.9.6',
+    'dm-reverb>=0.14.0',
+    'dm-launchpad>=0.5.4',
 ]
 
 core_requirements = [
@@ -53,14 +53,23 @@ core_requirements = [
     'typing-extensions',
 ]
 
+# JAX/Flax stack (modern). For GPU support, install the platform-appropriate
+# jaxlib wheel (CUDA or ROCm) matching the selected jax version. We deliberately
+# avoid strict pins here to support heterogeneous backends across nodes.
+# Example (set by your environment/tooling):
+#   - CUDA:   pip install --upgrade jax jaxlib  # with CUDA wheel
+#   - ROCm:   pip install --upgrade jax jaxlib  # with ROCm wheel
+# See JAX install guides for exact wheel URLs/extra indexes.
 jax_requirements = [
-    'jax==0.4.3',
-    'jaxlib==0.4.3',
-    'chex',
-    'dm-haiku',
-    'flax',
-    'optax',
-    'rlax',
+    'jax==0.7.1',
+    'jaxlib==0.7.1',
+    'chex==0.1.90',
+    # Haiku will be removed after migration; kept for transitional builds.
+    'dm-haiku>=0.0.12',
+    # Flax with NNX API (0.8+). Agents will progressively migrate from Haiku.
+    'flax==0.11.2',
+    'optax==0.2.5',
+    'rlax>=0.1.7',
 ] + tensorflow
 
 tf_requirements = [
@@ -69,18 +78,25 @@ tf_requirements = [
 ] + tensorflow
 
 testing_requirements = [
-    'pytype==2021.8.11',  # TODO(b/206926677): update to new version.
-    'pytest-xdist',
+    'pytype==2024.10.11',  # Latest version with Python 3.12 support
+    'pytest==8.4.1',
+    'pytest-xdist>=3.6.0',
 ]
 
 envs_requirements = [
-    'atari-py',
-    'bsuite',
+    # Removed packages incompatible with Python 3.12:
+    # - atari-py: build issues on Python 3.12
+    # - bsuite: uses deprecated imp module
+    # - rlds: only supports Python 3.7-3.10
     'dm-control',
-    'gym==0.25.0',
-    'gym[atari]',
-    'pygame==2.1.0',
-    'rlds',
+    'gymnasium==1.2.0',  # Latest version - provides Atari environments
+    'gymnasium[atari]',   # Atari environments through gymnasium instead of atari-py
+    'pygame==2.6.1',     # Latest version
+    # Modern alternatives to bsuite for RL benchmarking:
+    # Users can install these separately if needed:
+    # - stable-baselines3 (comprehensive RL algorithms)
+    # - rl-zoo3 (benchmark environments)
+    # - rlds (for offline RL datasets - install separately on Python <3.11)
 ]
 
 
@@ -166,8 +182,8 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.12',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
+    python_requires='>=3.12',
 )
