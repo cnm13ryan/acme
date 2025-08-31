@@ -24,3 +24,8 @@ single-stream vs. distributed agents).
    user/agents
    user/components
    faq
+
+.. toctree:: :caption: Compatibility
+   :titlesonly:
+
+   python-3.12-compatibility
