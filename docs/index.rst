@@ -34,3 +34,8 @@ single-stream vs. distributed agents).
    :titlesonly:
 
    running-agents-guide
+
+.. toctree:: :caption: Design & Architecture
+   :titlesonly:
+
+   acme_design
