@@ -29,3 +29,8 @@ single-stream vs. distributed agents).
    :titlesonly:
 
    python-3.12-compatibility
+
+.. toctree:: :caption: User Guides
+   :titlesonly:
+
+   running-agents-guide
